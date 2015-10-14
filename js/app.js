@@ -34,17 +34,32 @@ var Player = function(x, y, speed){
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
-
+    if (allowedKeys === 'up') {
+        this.y = this.y - 65;
+    }else{
+        if (allowedKeys === 'down'){
+            this.y = this.y + 65;
+        }else{
+            if (allowedKeys === 'left')
+            {
+                this.x = this.x - 65;
+            }else{
+                if (allowedKeys === 'right')
+                {
+                    this.x = this.x + 65;
+                };
+            };
+        };
+    };
 };
 
 Player.prototype.update = function() {
-    //this.x = this.x + this.speed;
+
 };
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-//Object.create(Enemy.prototype.render);
 
 
 // Now instantiate your objects.
