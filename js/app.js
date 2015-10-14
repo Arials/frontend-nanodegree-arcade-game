@@ -1,3 +1,12 @@
+// Blocks sizes
+var block_width = 101;
+var block_height = 83;
+var x_block = block_width / 2;
+var y_block = block_height / 2;
+// Char sizes
+var char_width = 101;
+var char_height = 95;
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -35,18 +44,18 @@ var Player = function(x, y, speed){
 
 Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'up') {
-        this.y = this.y - 65;
+        this.y = this.y - block_height;
     }else{
         if (allowedKeys === 'down'){
-            this.y = this.y + 65;
+            this.y = this.y + block_height;
         }else{
             if (allowedKeys === 'left')
             {
-                this.x = this.x - 65;
+                this.x = this.x - block_width;
             }else{
                 if (allowedKeys === 'right')
                 {
-                    this.x = this.x + 65;
+                    this.x = this.x + block_width;
                 };
             };
         };
@@ -67,7 +76,7 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 var allEnemies = [new Enemy(0,65,50), new Enemy(0,140,80)];
 
-var player = new Player(3*65,6*65,0);
+var player = new Player((block_width) - char_width, block_height - char_height,0);
 
 
 
