@@ -29,6 +29,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x = this.x + (this.speed * dt);
 
+    // If enemy out for the right, come back for the left
     if (this.x > (101*5))
     {
         this.x = -101;
@@ -39,6 +40,8 @@ Enemy.prototype.update = function(dt) {
     {
         if (Math.abs(this.y - this.player.y) < 20)
         {
+            // Collision detected, reset the player position
+            console.log('You lose!');
             this.player.reset();
         };
     };
@@ -63,9 +66,11 @@ var Player = function(){
 Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'up') {
         this.block_y--;
-        if (this.block_y < 0)
+        if (this.block_y < 1)
         {
-            this.block_y = 6 + this.block_y;
+            // Player wins
+            console.log('You win!');
+            this.reset();
         };
     }else{
         if (allowedKeys === 'down'){
@@ -112,7 +117,16 @@ Player.prototype.reset = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var player = new Player();
-var allEnemies = [new Enemy(-101,65,50, player), new Enemy(-101,140,80, player)];
+var allEnemies = [
+    new Enemy(-101,65,50, player),
+    new Enemy(-101,65,90, player),
+    new Enemy(-101,140,80, player),
+    new Enemy(-101,140,120, player),
+    new Enemy(-101,140,170, player),
+    new Enemy(-101,140,80, player),
+    new Enemy(-101,220,200, player),
+    new Enemy(-101,220,100, player)
+    ];
 
 
 
