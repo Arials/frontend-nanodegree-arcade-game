@@ -5,7 +5,7 @@ var x_block = block_width / 2;
 var y_block = block_height / 2;
 // Char sizes
 var char_width = 101;
-var char_height = 95;
+var char_height = 110;
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -37,8 +37,9 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, speed){
-    Enemy.call(this, x, y, speed);
+var Player = function(){
+    this.x = (block_width - char_width) + (2 * block_width);
+    this.y = (block_height - char_height) + (5 * block_height);
     this.sprite = 'images/char-boy.png';
 };
 
@@ -76,7 +77,7 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 var allEnemies = [new Enemy(0,65,50), new Enemy(0,140,80)];
 
-var player = new Player((block_width) - char_width, block_height - char_height,0);
+var player = new Player();
 
 
 
