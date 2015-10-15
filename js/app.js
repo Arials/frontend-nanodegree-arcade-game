@@ -38,25 +38,37 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(){
-    this.x = (block_width - char_width) + (2 * block_width);
-    this.y = (block_height - char_height) + (5 * block_height);
+    this.x = (block_width - char_width);
+    this.y = (block_height - char_height);
+    this.block_x = 2;
+    this.block_y = 5;
     this.sprite = 'images/char-boy.png';
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'up') {
-        this.y = this.y - block_height;
+        this.block_y--;
+        if (this.block_y < 0)
+        {
+            this.block_y = 6 + this.block_y;
+        };
     }else{
         if (allowedKeys === 'down'){
-            this.y = this.y + block_height;
+            this.block_y++;
+            this.block_y %= 6;
         }else{
             if (allowedKeys === 'left')
             {
-                this.x = this.x - block_width;
+                this.block_x--;
+                if (this.block_x < 0)
+                {
+                    this.block_x = 5 + this.block_x;
+                };
             }else{
                 if (allowedKeys === 'right')
                 {
-                    this.x = this.x + block_width;
+                    this.block_x++;
+                    this.block_x %= 5;
                 };
             };
         };
@@ -64,7 +76,8 @@ Player.prototype.handleInput = function(allowedKeys) {
 };
 
 Player.prototype.update = function() {
-
+    this.x = (block_width - char_width) + (this.block_x * block_width);
+    this.y = (block_height - char_height) + (this.block_y * block_height);
 };
 
 Player.prototype.render = function() {
