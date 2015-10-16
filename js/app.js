@@ -55,10 +55,16 @@ Enemy.prototype.render = function() {
 
 // Player class
 var Player = function(){
+    // player position
     this.x = (block_width - char_width);
     this.y = (block_height - char_height);
+
+    // player block.
+    // Identify the row/column of the player
     this.block_x = 2;
     this.block_y = 5;
+
+    // The image/sprite for our player
     this.sprite = 'images/char-boy.png';
     this.score = 0;
 };
@@ -72,9 +78,10 @@ Player.prototype.handleInput = function(allowedKeys) {
             // Player wins
             this.reset();
             this.score++;
-        };
+        }
     }else{
         if (allowedKeys === 'down'){
+            // player can only go down until row 5
             if (this.block_y < 5)
             {
                 this.block_y++;
@@ -83,36 +90,22 @@ Player.prototype.handleInput = function(allowedKeys) {
             if (allowedKeys === 'left')
             {
                 this.block_x--;
+                // If go the left of column 0
+                // appears on the right
                 if (this.block_x < 0)
                 {
                     this.block_x = 5 + this.block_x;
-                };
+                }
             }else{
                 if (allowedKeys === 'right')
                 {
                     this.block_x++;
+                    // If go to the left of column 5
+                    // appears on the left
                     this.block_x %= 5;
-                };
-            };
-        };
-    };
-};
-
-// Code from MemesMake
-var printScore = function(score)
-{
-    // Text attributes
-    ctx.font = '20pt Impact';
-    ctx.textAlign = 'center';
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 3;
-    ctx.fillStyle = 'white';
-    var topLine = 'Score ' + score;
-
-    // Print score in canvas
-    if (topLine != null) {
-        ctx.fillText(topLine, 505 / 2, 80);
-        ctx.strokeText(topLine, 505 / 2, 80);
+                }
+            }
+        }
     }
 };
 
@@ -134,6 +127,23 @@ Player.prototype.reset = function() {
     this.block_y = 5;
 };
 
+
+// Code from MemesMake for score system
+var printScore = function(score){
+    // Text attributes
+    ctx.font = '20pt Impact';
+    ctx.textAlign = 'center';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 3;
+    ctx.fillStyle = 'white';
+    var topLine = 'Score ' + score;
+
+    // Print score in canvas
+    if (topLine != null) {
+        ctx.fillText(topLine, 505 / 2, 80);
+        ctx.strokeText(topLine, 505 / 2, 80);
+    }
+};
 
 // Player instance
 var player = new Player();

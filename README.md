@@ -1,4 +1,4 @@
-# frontend-nanodegree-arcade-game
+# Frogger Game
 
 ## Run instructions:
 Download all the files in the same relative path.
