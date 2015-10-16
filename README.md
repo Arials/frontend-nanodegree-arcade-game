@@ -1,6 +1,10 @@
-frontend-nanodegree-arcade-game
-===============================
+# frontend-nanodegree-arcade-game
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+## Run instructions:
+Download all the files in the same relative path.
+Open "*index.html*" in your browser and enjoy it.
 
-for self-checking their submission.
+## Player instructions:
+You can move up, left, right and down.
+To add points, you need to reach water dodging enemies.
+If one enemy eats you, you lose all points.

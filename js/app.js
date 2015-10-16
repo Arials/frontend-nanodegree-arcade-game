@@ -21,7 +21,7 @@ var Enemy = function(x, y, speed, player) {
     this.sprite = 'images/enemy-bug.png';
 };
 
-// Update the enemy's position, required method for game
+// Update the enemy's position
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
@@ -41,20 +41,19 @@ Enemy.prototype.update = function(dt) {
         if (Math.abs(this.y - this.player.y) < 20)
         {
             // Collision detected, reset the player position
+            // You lose!
             this.player.reset();
             this.player.score = 0;
         };
     };
 };
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class
 var Player = function(){
     this.x = (block_width - char_width);
     this.y = (block_height - char_height);
@@ -64,6 +63,7 @@ var Player = function(){
     this.score = 0;
 };
 
+// Input handler for player movement
 Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'up') {
         this.block_y--;
@@ -116,11 +116,13 @@ var printScore = function(score)
     }
 };
 
+// Update player position
 Player.prototype.update = function() {
     this.x = (block_width - char_width) + (this.block_x * block_width);
     this.y = (block_height - char_height) + (this.block_y * block_height);
 };
 
+// Draw Player in canvas
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     printScore(this.score);
@@ -133,19 +135,18 @@ Player.prototype.reset = function() {
 };
 
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Player instance
 var player = new Player();
+// Array of Enemys instances
 var allEnemies = [
-    new Enemy(-101,65,50, player),
-    new Enemy(-101,65,90, player),
-    new Enemy(-101,140,80, player),
-    new Enemy(-101,140,120, player),
-    new Enemy(-101,140,170, player),
-    new Enemy(-101,140,80, player),
-    new Enemy(-101,220,200, player),
-    new Enemy(-101,220,100, player)
+    new Enemy(-101, 65, 50, player),
+    new Enemy(-101, 65, 90, player),
+    new Enemy(-101, 140, 80, player),
+    new Enemy(-101, 140, 120, player),
+    new Enemy(-101, 140, 170, player),
+    new Enemy(-101, 140, 80, player),
+    new Enemy(-101, 220, 200, player),
+    new Enemy(-101, 220, 100, player)
     ];
 
 
