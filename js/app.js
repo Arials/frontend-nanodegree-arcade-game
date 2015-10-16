@@ -1,19 +1,24 @@
+// Constants values:
+
 // Blocks sizes
-var block_width = 101;
-var block_height = 83;
-var x_block = block_width / 2;
-var y_block = block_height / 2;
+var BLOCK_WIDTH= 101;
+var BLOCK_HEIGHT = 83;
+
 // Char sizes
-var char_width = 101;
-var char_height = 110;
+var CHAR_WIDTH = 101;
+var CHAR_HEIGHT = 110;
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed, player) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+    // Enemy position
     this.x = x;
     this.y = y;
+
+    // Enemy speed
     this.speed = speed;
+
+    // Player instance
+    // For collision calculatio
     this.player = player;
 
     // The image/sprite for our enemies, this uses
@@ -56,8 +61,8 @@ Enemy.prototype.render = function() {
 // Player class
 var Player = function(){
     // player position
-    this.x = (block_width - char_width);
-    this.y = (block_height - char_height);
+    this.x = (BLOCK_WIDTH- CHAR_WIDTH);
+    this.y = (BLOCK_HEIGHT - CHAR_HEIGHT);
 
     // player block.
     // Identify the row/column of the player
@@ -70,8 +75,8 @@ var Player = function(){
 };
 
 // Input handler for player movement
-Player.prototype.handleInput = function(allowedKeys) {
-    if (allowedKeys === 'up') {
+Player.prototype.handleInput = function(key) {
+    if (key === 'up') {
         this.block_y--;
         if (this.block_y < 1)
         {
@@ -80,14 +85,14 @@ Player.prototype.handleInput = function(allowedKeys) {
             this.score++;
         }
     }else{
-        if (allowedKeys === 'down'){
+        if (key === 'down'){
             // player can only go down until row 5
             if (this.block_y < 5)
             {
                 this.block_y++;
             }
         }else{
-            if (allowedKeys === 'left')
+            if (key === 'left')
             {
                 this.block_x--;
                 // If go the left of column 0
@@ -97,7 +102,7 @@ Player.prototype.handleInput = function(allowedKeys) {
                     this.block_x = 5 + this.block_x;
                 }
             }else{
-                if (allowedKeys === 'right')
+                if (key === 'right')
                 {
                     this.block_x++;
                     // If go to the left of column 5
@@ -111,8 +116,8 @@ Player.prototype.handleInput = function(allowedKeys) {
 
 // Update player position
 Player.prototype.update = function() {
-    this.x = (block_width - char_width) + (this.block_x * block_width);
-    this.y = (block_height - char_height) + (this.block_y * block_height);
+    this.x = (BLOCK_WIDTH- CHAR_WIDTH) + (this.block_x * BLOCK_WIDTH);
+    this.y = (BLOCK_HEIGHT - CHAR_HEIGHT) + (this.block_y * BLOCK_HEIGHT);
 };
 
 // Draw Player in canvas
@@ -147,6 +152,7 @@ var printScore = function(score){
 
 // Player instance
 var player = new Player();
+
 // Array of Enemys instances
 var allEnemies = [
     new Enemy(-101, 65, 50, player),
@@ -164,7 +170,7 @@ var allEnemies = [
 
 
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
