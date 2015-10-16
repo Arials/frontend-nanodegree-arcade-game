@@ -41,8 +41,8 @@ Enemy.prototype.update = function(dt) {
         if (Math.abs(this.y - this.player.y) < 20)
         {
             // Collision detected, reset the player position
-            console.log('You lose!');
             this.player.reset();
+            this.player.score = 0;
         };
     };
 };
@@ -61,6 +61,7 @@ var Player = function(){
     this.block_x = 2;
     this.block_y = 5;
     this.sprite = 'images/char-boy.png';
+    this.score = 0;
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
@@ -69,8 +70,8 @@ Player.prototype.handleInput = function(allowedKeys) {
         if (this.block_y < 1)
         {
             // Player wins
-            console.log('You win!');
             this.reset();
+            this.score++;
         };
     }else{
         if (allowedKeys === 'down'){
@@ -97,6 +98,24 @@ Player.prototype.handleInput = function(allowedKeys) {
     };
 };
 
+// Code from MemesMake
+var printScore = function(score)
+{
+    // Text attributes
+    ctx.font = '20pt Impact';
+    ctx.textAlign = 'center';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 3;
+    ctx.fillStyle = 'white';
+    var topLine = 'Score ' + score;
+
+    // Print score in canvas
+    if (topLine != null) {
+        ctx.fillText(topLine, 505 / 2, 80);
+        ctx.strokeText(topLine, 505 / 2, 80);
+    }
+};
+
 Player.prototype.update = function() {
     this.x = (block_width - char_width) + (this.block_x * block_width);
     this.y = (block_height - char_height) + (this.block_y * block_height);
@@ -104,6 +123,7 @@ Player.prototype.update = function() {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    printScore(this.score);
 };
 
 // Reset the player to the start position
